@@ -4,10 +4,27 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductSummary  {
+public class ProductSummary {
+    public static void main(String[] args) {
+        // Example usage with hardcoded path
+        setFilePath("C:\\Users\\ferna\\IdeaProjects\\JavaLearningDay7\\src\\product_sales_data.csv");
+        generateSummary();
+    }
+
+    private static String filePath;
+
+    // Method to set the file path directly in the code
+    public static void setFilePath(String path) {
+        filePath = path;
+    }
 
     // Method to read the CSV file and calculate the summary
-    public static void generateSummary(String filePath) {
+    public static void generateSummary() {
+        if (filePath == null || filePath.isEmpty()) {
+            System.out.println("File path is not set.");
+            return;
+        }
+
         // Data structures to store product data
         Map<String, Integer> productQuantityMap = new HashMap<>();
         Map<String, Double> productSalesMap = new HashMap<>();
@@ -68,15 +85,5 @@ public class ProductSummary  {
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Usage: java ProductSummary <path-to-csv-file>");
-            return;
-        }
-
-        String filePath = args[0];
-        generateSummary(filePath);
     }
 }
